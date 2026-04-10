@@ -1,6 +1,6 @@
 import pytest
 import requests
-from api_testing.api_data.objects_data import objects_data
+from api_testing.api_data.api_test_data import api_test_data
 
 
 @pytest.fixture(scope="class", autouse=True)
@@ -11,6 +11,6 @@ def session(request):
     yield
     session.close()
 
-@pytest.fixture(params=objects_data, ids=lambda c: c.name)
+@pytest.fixture(params=api_test_data, ids=lambda c: c.name)
 def case(request):
     return request.param

@@ -1,11 +1,11 @@
 import pytest
 import requests
 from dataclasses import asdict
-from api_testing.Api_data.objects_data import objects_data
-from api_testing.common_functions.common_functions import end_point
+from api_testing.api_data.api_test_data import api_test_data
+from api_testing.common_functions.common_api_functions import end_point
 
 
-@pytest.fixture(params=objects_data, ids=lambda c: c.name)
+@pytest.fixture(params=api_test_data, ids=lambda c: c.name)
 def case(request):
     return request.param
 

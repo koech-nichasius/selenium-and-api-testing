@@ -1,8 +1,8 @@
 from dataclasses import asdict
-from api_testing.common_functions.common_functions import end_point
+from api_testing.common_functions.common_api_functions import end_point
 
 class TestApi:
-
+    """This class utilises class level fixture to execute tests."""
     def get_object(self, case):
         """Helper method to fetch an object by case."""
         return self.session.get(end_point(case.id))

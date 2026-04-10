@@ -10,7 +10,7 @@ class ApiTestData:
     data: None | str | dict[str, Any]
     base_url = "https://api.restful-api.dev/"
 
-objects_data = [
+api_test_data = [
     ApiTestData('1', 'Google Pixel 6 Pro', {
             "color": "Cloudy White",
             "capacity": "128 GB"
