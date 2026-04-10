@@ -2,8 +2,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
 
-from Selenium.interfaces.driver import ILoginPage
-from Selenium.locators.locators import Locator
+from selenium_project.interfaces.driver import ILoginPage
+from selenium_project.locators.locators import Locator
 
 
 class FileUpload(ILoginPage):
@@ -11,6 +11,8 @@ class FileUpload(ILoginPage):
     def __init__(self, driver):
         super().__init__(driver)
         self._file_upload : WebElement = self.driver.find_element(By.CSS_SELECTOR, 'input[name="my-file"]')
+
+    
 
     def upload_file(self, file_2_upload)-> None:
         """Upload file"""

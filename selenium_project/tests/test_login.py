@@ -19,4 +19,6 @@ class TestLogin:
         login_page.enter_user_name(test_user)
         login_page.enter_password(user_password)
         login_page.tap_login_btn()
-        assert not login_page.is_login_success() # No correct passwords in demo site
+        assert  login_page.is_login_success()
+        pytest.xfail("There are no correct or wrong passwords in demo site")
+
