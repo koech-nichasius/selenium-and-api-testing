@@ -1,7 +1,7 @@
+"""This module contains common functions for API Testing."""
+from api_testing.Api_data.objects_data import ApiTestData
 
-from api_testing.Api_data.objects_data import base_url
-
-
-def request_object(id:int)-> str:
-    return f"{base_url}objects/{id}"
+def end_point(id:int)-> str:
+    """Return resource from endpoint."""
+    return f"{ApiTestData.base_url}objects/{id}"
 
