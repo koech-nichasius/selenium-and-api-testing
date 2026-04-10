@@ -1,5 +1,5 @@
 
-from ApiTesting.Api_data.objects_data import base_url
+from api_testing.Api_data.objects_data import base_url
 
 
 def request_object(id:int)-> str:

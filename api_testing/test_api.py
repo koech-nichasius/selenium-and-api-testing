@@ -3,8 +3,8 @@ from dataclasses import asdict
 
 import requests
 
-from ApiTesting.Api_data.objects_data import objects_data
-from ApiTesting.common_functions.common_functions import request_object
+from api_testing.Api_data.objects_data import objects_data
+from api_testing.common_functions.common_functions import request_object
 
 # class TestApi:
 #

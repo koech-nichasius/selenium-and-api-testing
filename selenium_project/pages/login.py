@@ -43,12 +43,11 @@ class LoginPage(IBasePage):
 
     def tap_login_btn(self)-> None:
         """Press Login Button"""
-        submit_button = self.wait.until(
+        self.wait.until(
             EC.element_to_be_clickable(
-                (By.XPATH, Locator.submit_button)
+                (By.XPATH, "//button[normalize-space()='Submit']")
             )
-        )
-        submit_button.click()
+        ).click()
 
     def is_logged_in(self)-> bool:
         """Verify Login successful window opened."""

@@ -1,7 +1,7 @@
 import pytest
 import requests
 
-from ApiTesting.Api_data.objects_data import objects_data
+from api_testing.Api_data.objects_data import objects_data
 
 
 @pytest.fixture(scope="class", autouse=True)

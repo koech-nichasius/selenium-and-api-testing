@@ -10,7 +10,7 @@ class DropDownPage(IBasePage):
     """"This class represents functions for the Login Page"""
     def __init__(self, driver):
         super().__init__(driver)
-        self.dropdown_element = By.CSS_SELECTOR, 'select[name="my-select"]'
+        self.dropdown_element = (By.CSS_SELECTOR, 'select[name="my-select"]')
 
     @property
     def drop_down(self)-> Select:
