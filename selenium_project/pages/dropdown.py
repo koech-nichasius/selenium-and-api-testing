@@ -3,11 +3,10 @@ from typing import List
 from selenium.common import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
+from selenium_project.interfaces.driver import IBasePage
 
-from Selenium.interfaces.driver import ILoginPage
 
-
-class DropDownPage(ILoginPage):
+class DropDownPage(IBasePage):
     """"This class represents functions for the Login Page"""
     def __init__(self, driver):
         super().__init__(driver)

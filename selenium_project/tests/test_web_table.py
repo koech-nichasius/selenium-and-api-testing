@@ -9,6 +9,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 driver = webdriver.Chrome()
 driver.get("https://www.tutorialspoint.com/selenium/practice/webtables.php")
 wait= WebDriverWait(driver, 10)
+# wait.until(EC.element_to_be_clickable(edit_btns[2])).click()
 time.sleep(5)
 
 table =  driver.find_element(By.XPATH,"//form//table")
@@ -16,7 +17,7 @@ t_headers= table.find_elements(By.XPATH, ".//tr/th")
 t_rows = table.find_elements(By.XPATH, ".//tbody/tr")
 
 edit_btns = table.find_elements(By.XPATH, ".//tbody/tr")
-# wait.until(EC.element_to_be_clickable(edit_btns[2])).click()
+
 
 
 table_headers = [th.text.strip() for th in t_headers]

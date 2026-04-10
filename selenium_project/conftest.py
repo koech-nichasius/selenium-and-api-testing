@@ -1,45 +1,47 @@
-import logging
 import pytest
+import logging
 from pytest import fixture
+from typing import Any, Generator
 from selenium import webdriver
-from typing import Iterable, TypeVar
-
-
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.firefox.service import Service as FirefoxService
 
-from Selenium.pages import LoginPage
-from Selenium.pages.login import LoginPage
-from Selenium.pages.dropdown import DropDownPage
-from Selenium.pages.date_picker import DatePicker
-from Selenium.pages.file_upload import FileUpload
+from selenium_project.pages.login import LoginPage
+from selenium_project.pages.dropdown import DropDownPage
+from selenium_project.pages.date_picker import DatePicker
+from selenium_project.pages.file_upload import FileUpload
+from selenium_project.pages.slider import Slider
 
-from Selenium.pages.slider import Slider
 
-T=TypeVar("T")
 TARGET_URL = "https://www.selenium.dev/selenium/web/web-form.html"
+
+
 def pytest_addoption(parser):
     parser.addoption(
-        "--browser", action="store", default="chrome", help="Select the browser to use in test."
+        "--browser",
+        action="store",
+        default="chrome",
+        help="Browser to run tests against"
     )
 
 
 @pytest.fixture
-def browser(request)-> str:
+def browser(request) -> str:
     return request.config.getoption("--browser")
 
-@pytest.fixture(scope="function")
+@pytest.fixture
 def driver(browser):
     if browser == "chrome":
-        selected_driver = webdriver.Chrome(service=ChromeService())
+        driver = webdriver.Chrome(service=ChromeService())
+        driver.implicitly_wait(60)
     elif browser == "firefox":
-        selected_driver = webdriver.Firefox(service=FirefoxService())
+        driver = webdriver.Firefox(service=FirefoxService())
+        driver.implicitly_wait(60)
     else:
         raise ValueError(f"Unsupported browser: {browser}")
-
-    selected_driver.get(TARGET_URL)
-    yield selected_driver
-    selected_driver.quit()
+    driver.get(TARGET_URL)
+    yield driver
+    driver.quit()
 
 @pytest.fixture
 def slider(driver) -> Slider:
@@ -49,7 +51,7 @@ def slider(driver) -> Slider:
 def dropdown_page(driver) -> DropDownPage:
     return DropDownPage(driver)
 
-@pytest.fixture(scope="function")
+@pytest.fixture
 def file_upload(driver) -> FileUpload:
     return FileUpload(driver)
 
@@ -58,14 +60,8 @@ def date_picker(driver) -> DatePicker:
     driver.refresh()
     return DatePicker(driver)
 
-# @pytest.fixture
-# def login_page(driver) -> Generator[LoginPage, Any, None]:
-#     # driver.refresh()
-#     yield LoginPage(driver)
-#     driver.close()
-
 @fixture
-def login_page()-> Iterable[T]:
+def login_page()-> Generator[LoginPage, Any, None]:
     """This fixture returns a WebDriver."""
     logging.debug("Initializing Chrome WebDriver")
     chrome_driver = webdriver.Chrome()

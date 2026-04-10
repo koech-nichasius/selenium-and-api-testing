@@ -5,10 +5,10 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
-from Selenium.interfaces.driver import ILoginPage
+from selenium_project.interfaces.driver import IBasePage
 
 
-class DatePicker(ILoginPage):
+class DatePicker(IBasePage):
     """"This class represents functions for the Login Page"""
 
     def __init__(self, driver):

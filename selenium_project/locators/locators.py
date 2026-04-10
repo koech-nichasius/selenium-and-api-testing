@@ -1,21 +1,20 @@
 from dataclasses import dataclass
 
-from selenium.webdriver.common.by import By
-from selenium.webdriver.remote.webelement import WebElement
-
 @dataclass
 class Locator:
     """This dataclass contains locator names."""
-
     user_name_box: str = '//input[@id="my-text-id"]'
-    password_box: str = 'input[type="password"]'
-    submit_button: str = "button"
+    password_box: str =  "my-password"
+    submit_button: str = "//button[normalize-space()='Submit']"
     disabled_input: str = "my-disabled"
 
     # Dropdown
-    dropdown_select: WebElement = 'input[name="my-select"]'
-    file_btn: WebElement = '"my-file"'
-    submission_success = "https://www.selenium.dev/selenium/web/submitted-form.html"
+    dropdown_select: str = 'input[name="my-select"]'
+    file_btn: str = '"my-file"'
+    submission_success: str = "https://www.selenium.dev/selenium/web/submitted-form.html"
+
+    # File Upload
+    file_upload: str = "my-file"
 
     # Slider
     slider:str = "my-range"
