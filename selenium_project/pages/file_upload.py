@@ -30,13 +30,13 @@ class FileUpload(BasePage):
 
     def tap_submit_btn(self)-> None:
         """Press submit Button"""
-        self.driver.find_element(By.CSS_SELECTOR, Locator.submit_button).click()
+        self.driver.find_element(*Locator.submit_button).click()
 
     def is_file_submitted(self) -> bool:
-        """Verify Login successful window opened."""
-
-        self.wait.until(
-            EC.url_contains(Locator.submission_success)
+        """Verify submission successful window opened."""
+        message = self.wait.until(
+            EC.visibility_of_element_located(
+                Locator.submission_success
+            )
         )
-
-        return self.driver.current_url.startswith(Locator.submission_success)
+        return message.is_displayed()

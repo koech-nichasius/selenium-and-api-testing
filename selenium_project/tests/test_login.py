@@ -9,7 +9,7 @@ class TestLogin:
         login_page.enter_user_name(test_user)
         login_page.enter_password(user_password)
         login_page.tap_login_btn()
-        assert login_page.is_login_success()
+        assert login_page.submission_success()
 
 
     @pytest.mark.parametrize(("test_user", "user_password"),
@@ -19,6 +19,6 @@ class TestLogin:
         login_page.enter_user_name(test_user)
         login_page.enter_password(user_password)
         login_page.tap_login_btn()
-        assert  login_page.is_login_success()
+        assert  login_page.submission_success()
         pytest.xfail("There are no correct or wrong passwords in demo site")
 

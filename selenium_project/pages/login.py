@@ -14,21 +14,10 @@ class LoginPage(BasePage):
     def open_login_page(self, url:str)-> None:
         self.driver.get(url)
 
-    def is_login_success(self)-> bool:
-        """Verify login success."""
-        WebDriverWait(self.driver, 5).until(
-            lambda d: d.current_url.startswith(
-                Locator.submission_success
-            )
-        )
-        return self.driver.current_url.startswith(
-            Locator.submission_success
-        )
-
     def enter_user_name(self, user_name:str)-> None:
         """Enter the User Login  Name."""
         user_name_field=self.driver.find_element(
-            By.XPATH,'//input[@id="my-text-id"]'
+            *Locator.user_name_input
         )
         user_name_field.clear()
         user_name_field.send_keys(user_name)
@@ -36,7 +25,7 @@ class LoginPage(BasePage):
     def enter_password(self, password:str)-> None:
         """Enter the User Login Password."""
         password_field=self.driver.find_element(
-            By.NAME,Locator.password_box
+            *Locator.password_input
         )
         password_field.clear()
         password_field.send_keys(password)
@@ -45,16 +34,15 @@ class LoginPage(BasePage):
         """Press Login Button"""
         self.wait.until(
             EC.element_to_be_clickable(
-                (By.XPATH, "//button[normalize-space()='Submit']")
+                Locator.submit_button
             )
         ).click()
 
     def is_logged_in(self)-> bool:
         """Verify Login successful window opened."""
         self.wait.until(
-            lambda d: d.current_url.startswith(
-                Locator.submission_success
-            )
+            lambda d: Locator.submission_form in d.current_url
         )
-        return self.driver.current_url.startswith(Locator.submission_success)
+        return  Locator.submission_form in self.driver.current_url
+
 

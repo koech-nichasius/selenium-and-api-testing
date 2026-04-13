@@ -14,14 +14,13 @@ class DatePicker(BasePage):
 
     def __init__(self, driver):
         super().__init__(driver)
-        self.date_input_element: Tuple[str, str] = By.CSS_SELECTOR, 'input[name="my-date"]'
         self.date_switch: Tuple[str, str] = (By.CSS_SELECTOR,'th[class="datepicker-switch"]')
 
 
     @property
     def date_input(self) -> WebElement:
         """Click on the Date Field"""
-        return self.driver.find_element(*self.date_input_element)
+        return self.driver.find_element(*Locator.date_input)
 
     def clear_existing_date(self) -> None:
         """"Clear date field."""
@@ -59,7 +58,7 @@ class DatePicker(BasePage):
         """Return a list of all months in Calendar."""
         self.tap_month_switch()
 
-        all_months: List[WebElement] =self.driver.find_elements(By.XPATH,"//span[contains(concat(' ', normalize-space(@class), ' '), ' month ')]")
+        all_months: List[WebElement] =self.driver.find_elements(Locator.all_months)
         return all_months
 
     def get_dates(self):

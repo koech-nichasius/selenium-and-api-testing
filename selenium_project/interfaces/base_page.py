@@ -2,7 +2,11 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import StaleElementReferenceException
 
+from selenium_project.locators.locators import Locator
+
+SUBMIT_SUCCESS = "https://www.selenium.dev/selenium/web/submitted-form.html"
 
 class BasePage:
     """This class represents functions for the Login Page"""
@@ -27,3 +31,20 @@ class BasePage:
     def is_element_visible(self,element) -> bool:
         """Return True if element is displayed, else False."""
         return self.wait.until(EC.visibility_of_element_located(element)).is_displayed()
+
+    def submission_success(self)-> bool:
+        """Verify login success."""
+        message = self.wait.until(
+            EC.visibility_of_element_located(
+                Locator.submission_success
+            )
+        )
+        return message.is_displayed()
+
+    def click_element(self,element):
+        """Function handles stale elements. Fresh element look-upo is initiated incase it is stale."""
+        try:
+            element.click()
+        except StaleElementReferenceException:
+            element = self.driver.find_element(*element)
+            element.click()
