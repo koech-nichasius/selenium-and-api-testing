@@ -36,7 +36,7 @@ class DatePicker(BasePage):
 
     def tap_date_field(self) -> None:
         """Tap Date input field."""
-        self.date_input.click()
+        self.wait.until(EC.element_to_be_clickable(Locator.date_input)).click()
 
     def is_calendar_displayed(self) -> bool:
         """Return True if Calendar is displayed, else False."""
@@ -71,7 +71,7 @@ class DatePicker(BasePage):
     def select_date(self, date_val: int) -> None:
         """Select date."""
         date = self.wait.until(EC.element_to_be_clickable(
-            (By.XPATH, f"//td[contains(@class,'day') and normalize-space(text())='{str(date_val)}']")))
+            (By.XPATH, f"//td[contains(@class,'day') and normalize-space(.)='{str(date_val)}']")))
         date.click()
 
     def verify_date_set(self, date_set: int) -> bool:

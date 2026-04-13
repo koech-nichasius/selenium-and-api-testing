@@ -23,6 +23,9 @@ class Locator:
     slider:str = "my-range"
 
     # Web Table
-    month_switch=(By.CSS_SELECTOR, 'th[class="datepicker-switch"]')
+    all_dates = (By.XPATH, "//td[contains(@class, 'day')]")
+    date_input = (By.CSS_SELECTOR, 'input[name="my-date"]')
+    all_months = (By.XPATH, "//span[contains(concat(' ', normalize-space(@class), ' '), ' month ')]")
+    month_switch = (By.CSS_SELECTOR, 'th[class="datepicker-switch"]')
 
 

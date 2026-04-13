@@ -35,8 +35,7 @@ def driver(browser):
     if browser == "chrome":
         chrome_options = Options()
         chrome_options.add_argument("--headless=new")
-        chrome_options.add_argument("--disable-gpu")
-        driver = webdriver.Chrome(service=ChromeService(),options=chrome_options)
+        driver = webdriver.Chrome(service=ChromeService())
         driver.implicitly_wait(60)
     elif browser == "firefox":
         driver = webdriver.Firefox(service=FirefoxService())
