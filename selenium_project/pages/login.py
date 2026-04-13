@@ -8,7 +8,6 @@ class LoginPage(BasePage):
     """"This class represents functions for the Login Page"""
     def __init__(self, driver):
         super().__init__(driver)
-        self.wait = WebDriverWait(self.driver, 10)
 
     def open_login_page(self, url:str)-> None:
         self.driver.get(url)

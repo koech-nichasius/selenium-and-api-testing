@@ -37,7 +37,7 @@ class DatePicker(BasePage):
 
     def is_calendar_displayed(self) -> bool:
         """Return True if Calendar is displayed, else False."""
-        return self.is_element_visible(Locator.date_switch)
+        return self.is_element_visible(Locator.month_switch)
 
     def tap_month_switch(self)-> None:
         """Tap on Month switch menu"""

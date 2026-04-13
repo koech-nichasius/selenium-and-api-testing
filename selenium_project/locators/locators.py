@@ -12,9 +12,8 @@ class Locator:
     disabled_input = (By.NAME, "my-disabled")
     read_only_input = (By.NAME, "my-read-only")
 
-    # Dropdown
-    dropdown_select: str = 'input[name="my-select"]'
-    file_btn: str = '"my-file"'
+    # Dropdown elements
+    dropdown_select = (By.NAME, "my-select")
 
     # Submission page
     submission_success = (By.ID, "message")
@@ -34,10 +33,9 @@ class Locator:
         "and not(contains(@class,'active')) "
         "and not(contains(@class,'new'))]"
     )
-    date_input = (By.CSS_SELECTOR, "input[name='my-date']")
+    date_input = (By.NAME, "my-date")
     all_months = (By.XPATH, "//span[contains(concat(' ', normalize-space(@class), ' '), ' month ')]")
     month_switch = (By.CSS_SELECTOR, "th[class='datepicker-switch']")
-    date_switch = (By.CSS_SELECTOR, 'th[class="datepicker-switch"]')
 
 
 

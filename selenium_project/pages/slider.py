@@ -9,7 +9,6 @@ class Slider(BasePage):
 
     def __init__(self, driver):
         super().__init__(driver)
-        self.wait = WebDriverWait(driver, 10)
 
     @property
     def slider(self):

@@ -4,19 +4,19 @@ from selenium.common import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 from selenium_project.interfaces.base_page import BasePage
+from selenium_project.locators.locators import Locator
 
 
 class DropDownPage(BasePage):
     """"This class represents functions for the Login Page"""
     def __init__(self, driver):
         super().__init__(driver)
-        self.dropdown_element = (By.CSS_SELECTOR, 'select[name="my-select"]')
 
     @property
     def drop_down(self)-> Select:
         """Initialize dropdown element."""
         logging.info("Initialising Dropdown elements.")
-        return Select(self.driver.find_element(*self.dropdown_element))
+        return Select(self.driver.find_element(*Locator.dropdown_select))
 
     def get_all_selected_options(self)-> List[str]:
         """Function returns a list of all selected dropdown options assuming
