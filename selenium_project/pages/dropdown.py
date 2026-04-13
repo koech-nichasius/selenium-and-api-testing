@@ -2,7 +2,7 @@ import logging
 from typing import List
 from selenium.common import NoSuchElementException
 from selenium.webdriver.support.select import Select
-from selenium_project.interfaces.base_page import BasePage
+from selenium_project.common_functions.base_page import BasePage
 from selenium_project.locators.locators import Locator
 
 

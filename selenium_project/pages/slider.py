@@ -1,5 +1,5 @@
 from selenium.webdriver.common.by import By
-from selenium_project.interfaces.base_page import BasePage
+from selenium_project.common_functions.base_page import BasePage
 from selenium_project.locators.locators import Locator
 
 
