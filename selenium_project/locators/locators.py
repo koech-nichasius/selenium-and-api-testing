@@ -38,4 +38,10 @@ class Locator:
     month_switch = (By.CSS_SELECTOR, "th[class='datepicker-switch']")
 
 
+    # Web Table elements
+    table = (By.XPATH,"//form//table")
+    table_headers = (By.XPATH, ".//tr/th")
+    table_rows = (By.XPATH, ".//tbody/tr")
+    row_cells = (By.TAG_NAME, "td")
+
 
