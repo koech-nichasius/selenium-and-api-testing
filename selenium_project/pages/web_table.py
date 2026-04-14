@@ -1,5 +1,4 @@
 from typing import List
-from selenium.webdriver.common.by import By
 
 from selenium_project.locators.locators import Locator
 
