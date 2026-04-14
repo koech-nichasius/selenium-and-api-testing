@@ -10,6 +10,7 @@ from selenium_project.pages.dropdown import DropDownPage
 from selenium_project.pages.date_picker import DatePicker
 from selenium_project.pages.file_upload import FileUpload
 from selenium_project.pages.slider import Slider
+from selenium_project.pages.web_table import WebTable
 
 
 def pytest_addoption(parser):
@@ -56,6 +57,10 @@ def file_upload(driver) -> FileUpload:
 def date_picker(driver) -> DatePicker:
     driver.refresh()
     return DatePicker(driver)
+
+@fixture
+def web_table(driver) -> WebTable:
+    return WebTable(driver)
 
 @fixture
 def login_page()-> Generator[LoginPage, Any, None]:

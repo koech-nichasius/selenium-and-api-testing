@@ -1,62 +1,39 @@
-import json
-from pathlib import Path
+from typing import List
 from selenium.webdriver.common.by import By
-from selenium_project.common_functions.base_page import BasePage
-from selenium_project.locators.locators import Locator
 
+TARGET_URL="https://www.tutorialspoint.com/selenium/practice/webtables.php"
 
-class WebTable(BasePage):
+class WebTable:
     """"This class represents functions for the Web Table Page"""
 
     def __init__(self, driver):
-        super().__init__(driver)
-        self.driver.get("https://www.tutorialspoint.com/selenium/practice/webtables.php")
+        self.driver = driver
+        self.driver.get(TARGET_URL)
 
-# driver = webdriver.Chrome()
-# driver.get("https://www.tutorialspoint.com/selenium/practice/webtables.php")
-# wait= WebDriverWait(driver, 10)
-# time.sleep(5)
-#
-# table =  driver.find_element(By.XPATH,"//form//table")
-# t_headers= table.find_elements(By.XPATH, ".//tr/th")
-# t_rows = table.find_elements(By.XPATH, ".//tbody/tr")
-#
-# edit_btns = table.find_elements(By.XPATH, ".//tbody/tr")
-# # wait.until(EC.element_to_be_clickable(edit_btns[2])).click()
-#
-#
-# table_headers = [th.text.strip() for th in t_headers]
-#
-# json_data = []
-#
-# for row in t_rows:
-#     cells = row.find_elements(By.TAG_NAME, "td")
-#     cell_values = [cell.text.strip() or None for cell in cells]
-#
-#     # Skip rows that don't match header length
-#     if len(cell_values) != len(table_headers):
-#         print(f"Skipping row: {cell_values}")
-#         continue
-#
-#     row_dict = dict(zip(table_headers, cell_values))
-#     json_data.append(row_dict)
+    @property
+    def table(self):
+        """Returns table web element."""
+        return self.driver.find_element(By.XPATH,"//form//table")
 
+    def get_table_headers(self) -> List[str]:
+        """Return table headers."""
+        table_headers: List[str] = [th.text.strip() for th in self.table.find_elements(By.XPATH, ".//tr/th")]
+        return table_headers
 
-# write to file
-# output_file = Path("../data/table_output.json")
-# with output_file.open("w", encoding="utf-8") as f:
-#     json.dump(json_data, f, indent=2, ensure_ascii=False)
+    def get_table_rows(self):
+        """Return table rows values mapped to table headers-."""
+        headers = self.get_table_headers()
+        rows=self.table.find_elements(By.XPATH, ".//tbody/tr")
+        table_rows=[]
+        for row in rows:
+            cells = row.find_elements(By.TAG_NAME, "td")
+            row_values = [cell.text.strip() for cell in cells]
+            if not row_values:
+                # Skip empty rows
+                continue
+            table_rows.append(dict(zip(headers, row_values)))
+        return table_rows
 
-
-# for row_index, row in enumerate(rows, start=1):
-#     cells = row.find_elements(By.TAG_NAME, "td")
-#     row_data = [cell.text for cell in cells]
-#     print(f"Row {row_index}: {row_data}")
-#
-#     if "Cierra" in row.text:
-#         row.find_element(
-#             By.XPATH, ".//a[contains(@class,'edit-wrap')]"
-#         ).click()
-#
-#     time.sleep(30)
-
+    def add_table_record(self):
+        # wait.until(EC.element_to_be_clickable(edit_btns[2])).click()
+        ...
