@@ -7,7 +7,7 @@ from selenium_project.locators.locators import Locator
 
 
 class DropDownPage(BasePage):
-    """"This class represents functions for the Dropdown Functionality."""
+    """"This class contains functions for the Dropdown Functionality."""
     def __init__(self, driver):
         super().__init__(driver)
 

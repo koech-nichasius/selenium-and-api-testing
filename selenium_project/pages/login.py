@@ -4,7 +4,7 @@ from selenium_project.locators.locators import Locator
 
 
 class LoginPage(BasePage):
-    """"This class represents functions for the Login Functionality"""
+    """"This class contains functions for the Login Functionality"""
     def __init__(self, driver):
         super().__init__(driver)
 

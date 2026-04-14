@@ -6,7 +6,7 @@ from selenium_project.locators.locators import Locator
 
 
 class FileUpload(BasePage):
-    """"This class represents functions for the File Upload Functionality."""
+    """"This class contains functions for the File Upload Functionality."""
     def __init__(self, driver):
         super().__init__(driver)
 

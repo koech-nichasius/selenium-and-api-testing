@@ -1,18 +1,18 @@
 from typing import List
-
+from selenium.webdriver.remote.webelement import WebElement
 from selenium_project.locators.locators import Locator
 
 TARGET_URL="https://www.tutorialspoint.com/selenium/practice/webtables.php"
 
 class WebTable:
-    """"This class represents functions for the Web Table Page"""
+    """"This class contains functions for the Web Table Page"""
 
     def __init__(self, driver):
         self.driver = driver
         self.driver.get(TARGET_URL)
 
     @property
-    def table(self):
+    def table(self) -> WebElement:
         """Returns table web element."""
         return self.driver.find_element(*Locator.table)
 
@@ -22,7 +22,7 @@ class WebTable:
             th.text.strip() for th in self.table.find_elements(*Locator.table_headers)]
         return table_headers
 
-    def get_table_rows(self):
+    def get_table_rows(self) -> List[str]:
         """Return table rows values mapped to table headers-."""
         headers = self.get_table_headers()
         rows=self.table.find_elements(*Locator.table_rows)

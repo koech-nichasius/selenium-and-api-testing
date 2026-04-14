@@ -4,7 +4,7 @@ from selenium_project.locators.locators import Locator
 
 
 class Slider(BasePage):
-    """"This class represents functions for the Slider Functionality"""
+    """"This class contains functions for the Slider Functionality"""
 
     def __init__(self, driver):
         super().__init__(driver)

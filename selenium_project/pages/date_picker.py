@@ -9,7 +9,7 @@ from selenium_project.locators.locators import Locator
 
 
 class DatePicker(BasePage):
-    """"This class represents functions for the Date Picker Functionality."""
+    """"This class contains functions for the Date Picker Functionality."""
 
     def __init__(self, driver):
         super().__init__(driver)
