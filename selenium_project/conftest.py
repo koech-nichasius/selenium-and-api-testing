@@ -37,7 +37,6 @@ def driver(browser):
         driver = webdriver.Firefox(service=FirefoxService())
     else:
         raise ValueError(f"Unsupported browser: {browser}")
-
     yield driver
     driver.quit()
 
@@ -60,7 +59,7 @@ def date_picker(driver) -> DatePicker:
 
 @fixture
 def login_page()-> Generator[LoginPage, Any, None]:
-    """This fixture returns a WebDriver."""
+    """This fixture instantiates the login page."""
     logging.debug("Initializing Chrome WebDriver")
     chrome_driver = webdriver.Chrome()
     login = LoginPage(chrome_driver)

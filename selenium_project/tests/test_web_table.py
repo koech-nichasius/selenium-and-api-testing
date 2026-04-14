@@ -6,6 +6,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 
+from selenium_project.pages.web_table import WebTable
+
 driver = webdriver.Chrome()
 driver.get("https://www.tutorialspoint.com/selenium/practice/webtables.php")
 wait= WebDriverWait(driver, 10)
@@ -105,3 +107,16 @@ def test_json_headers_match_expected(json_file_path):
 #             assert value not in ("", None), (
 #                 f"Empty value found for key '{key}'"
 #             )
+
+
+# for row_index, row in enumerate(rows, start=1):
+#     cells = row.find_elements(By.TAG_NAME, "td")
+#     row_data = [cell.text for cell in cells]
+#     print(f"Row {row_index}: {row_data}")
+#
+#     if "Cierra" in row.text:
+#         row.find_element(
+#             By.XPATH, ".//a[contains(@class,'edit-wrap')]"
+#         ).click()
+#
+#     time.sleep(30)

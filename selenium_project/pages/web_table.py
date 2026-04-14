@@ -1,11 +1,16 @@
 import json
-import time
 from pathlib import Path
-
-from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from selenium_project.common_functions.base_page import BasePage
+from selenium_project.locators.locators import Locator
+
+
+class WebTable(BasePage):
+    """"This class represents functions for the Web Table Page"""
+
+    def __init__(self, driver):
+        super().__init__(driver)
+        self.driver.get("https://www.tutorialspoint.com/selenium/practice/webtables.php")
 
 # driver = webdriver.Chrome()
 # driver.get("https://www.tutorialspoint.com/selenium/practice/webtables.php")
@@ -38,9 +43,9 @@ from selenium.webdriver.support import expected_conditions as EC
 
 
 # write to file
-output_file = Path("../data/table_output.json")
-with output_file.open("w", encoding="utf-8") as f:
-    json.dump(json_data, f, indent=2, ensure_ascii=False)
+# output_file = Path("../data/table_output.json")
+# with output_file.open("w", encoding="utf-8") as f:
+#     json.dump(json_data, f, indent=2, ensure_ascii=False)
 
 
 # for row_index, row in enumerate(rows, start=1):
