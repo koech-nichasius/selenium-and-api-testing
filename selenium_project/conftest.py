@@ -1,7 +1,12 @@
+from typing import Any, Generator
+
 from pytest import fixture
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.firefox.service import Service as FirefoxService
+from selenium.webdriver.firefox.webdriver import WebDriver
+
 from selenium_project.pages.login import LoginPage
 from selenium_project.pages.dropdown import DropDownPage
 from selenium_project.pages.date_picker import DatePicker
@@ -25,7 +30,7 @@ def browser(request) -> str:
     return request.config.getoption("--browser")
 
 @fixture
-def driver(browser):
+def driver(browser) -> Generator[WebDriver | None]:
     """
     This fixture initializes a WebDriver for the specified browser,
      and ensures proper cleanup after the test execution by quitting the driver.
