@@ -5,12 +5,10 @@ from pathlib import Path
 @fixture
 def json_file_path():
     """Read json file data."""
-    json_path = (
-            Path(__file__).resolve()
+    json_path = (Path(__file__).resolve()
             .parent.parent
             / "data"
-            / "table_output.json"
-    )
+            / "table_output.json")
     return json_path
 
 @fixture

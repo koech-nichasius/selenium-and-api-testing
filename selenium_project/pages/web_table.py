@@ -1,15 +1,16 @@
 from typing import List
 from selenium.webdriver.remote.webelement import WebElement
+from selenium_project.config import WEB_TABLE_URL
 from selenium_project.locators.locators import Locator
+from selenium_project.pages.base_page import BasePage
 
-TARGET_URL="https://www.tutorialspoint.com/selenium/practice/webtables.php"
-
-class WebTable:
+class WebTable(BasePage):
     """"This class contains functions for the Web Table Page"""
 
     def __init__(self, driver):
+        super().__init__(driver)
         self.driver = driver
-        self.driver.get(TARGET_URL)
+        self.launch_web_driver(WEB_TABLE_URL)
 
     @property
     def table(self) -> WebElement:

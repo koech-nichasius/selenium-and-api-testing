@@ -2,8 +2,7 @@ import logging
 from typing import List
 from selenium.common import NoSuchElementException
 from selenium.webdriver.support.select import Select
-
-from selenium_project.config import TARGET_URL
+from selenium_project.config import BASE_URL
 from selenium_project.pages.base_page import BasePage
 from selenium_project.locators.locators import Locator
 
@@ -12,7 +11,7 @@ class DropDownPage(BasePage):
     """"This class contains functions for the Dropdown Functionality."""
     def __init__(self, driver):
         super().__init__(driver)
-        self.launch_web_driver(TARGET_URL)
+        self.launch_web_driver(BASE_URL)
 
     @property
     def drop_down(self)-> Select:

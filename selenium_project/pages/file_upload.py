@@ -1,8 +1,7 @@
 from pathlib import Path
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as EC
-
-from selenium_project.config import TARGET_URL
+from selenium_project.config import BASE_URL
 from selenium_project.pages.base_page import BasePage
 from selenium_project.locators.locators import Locator
 
@@ -11,7 +10,7 @@ class FileUpload(BasePage):
     """"This class contains functions for the File Upload Functionality."""
     def __init__(self, driver):
         super().__init__(driver)
-        self.launch_web_driver(TARGET_URL)
+        self.launch_web_driver(BASE_URL)
 
     @property
     def upload_file_btn(self) -> WebElement:
