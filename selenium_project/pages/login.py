@@ -1,4 +1,3 @@
-from selenium.webdriver.support import expected_conditions as EC
 from selenium_project.config import BASE_URL
 from selenium_project.pages.base_page import BasePage
 from selenium_project.locators.locators import Locator
@@ -10,7 +9,7 @@ class LoginPage(BasePage):
         super().__init__(driver)
         self.launch_web_driver(BASE_URL)
 
-    def enter_user_name(self, user_name:str)-> None:
+    def enter_user_name(self, user_name:str) -> None:
         """Enter the User Login  Name."""
         user_name_field=self.driver.find_element(
             *Locator.user_name_input )
@@ -26,8 +25,7 @@ class LoginPage(BasePage):
 
     def tap_login_btn(self)-> None:
         """Press Login Button"""
-        self.wait.until(EC.element_to_be_clickable(
-            Locator.submit_button)).click()
+        self.wait_clickable(Locator.submit_button).click()
 
     def is_logged_in(self)-> bool:
         """Verify Login successful window opened."""

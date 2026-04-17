@@ -1,10 +1,26 @@
 import logging
+from typing import Literal, Tuple
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import StaleElementReferenceException, TimeoutException
 from selenium_project.locators.locators import Locator
+
+
+ElementLocator = Tuple[
+    Literal[
+        "id",
+        "xpath",
+        "link text",
+        "partial link text",
+        "name",
+        "tag name",
+        "class name",
+        "css selector",
+    ],
+    str,
+]
 
 class BasePage:
     """This class contains common functions."""
@@ -36,19 +52,29 @@ class BasePage:
         """Tap backspace."""
         element.send_keys(Keys.BACKSPACE)
 
-    def wait_until_element_visible(self, element) -> None:
+    def wait_visible(self, locator):
         """Wait until element is visible."""
-        self.wait.until(EC.visibility_of_element_located(element))
+        return self.wait.until(EC.visibility_of_element_located(locator))
 
-    def is_element_visible(self,element) -> bool:
+    def wait_clickable(self, locator):
+        """Wait until element is clickable."""
+        return self.wait.until(EC.element_to_be_clickable(locator))
+
+    def wait_present(self, locator: ElementLocator) -> WebElement:
+        """Wait until element is present."""
+        return self.wait.until(EC.element_to_be_clickable(locator))
+
+    def wait_not_visible(self, locator: ElementLocator) -> WebElement:
+        """Wait until element is invisible."""
+        return self.wait.until(EC.invisibility_of_element(locator))
+
+    def is_element_visible(self, element:WebElement) -> bool:
         """Return True if element is displayed, else False."""
-        return self.wait.until(
-            EC.visibility_of_element_located(element)).is_displayed()
+        return self.wait_visible(element).is_displayed()
 
     def submission_success(self)-> bool:
         """Verify submission success."""
-        message = self.wait.until(
-            EC.visibility_of_element_located(Locator.submission_success))
+        message = self.wait_visible(Locator.submission_success)
         return message.is_displayed()
 
     def click_element(self,element) -> None:

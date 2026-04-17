@@ -23,7 +23,7 @@ class WebTable(BasePage):
             th.text.strip() for th in self.table.find_elements(*Locator.table_headers)]
         return table_headers
 
-    def get_table_rows(self) -> List[str]:
+    def get_table_rows(self) -> List[dict]:
         """Return table rows values mapped to table headers-."""
         headers = self.get_table_headers()
         rows=self.table.find_elements(*Locator.table_rows)
@@ -38,5 +38,5 @@ class WebTable(BasePage):
         return table_rows
 
     def add_table_record(self):
-        # wait.until(EC.element_to_be_clickable(edit_btns[2])).click()
+        # self.wait_clickable(edit_btns[2]).click()
         ...

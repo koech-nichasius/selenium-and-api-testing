@@ -14,8 +14,7 @@ def json_file_path():
 @fixture
 def table_rows(web_table):
     rows = web_table.get_table_rows()
-    assert rows, "Table contains no rows"
-    yield rows
+    return rows
 
 @pytest.mark.parametrize(
     "expected_headers",[['First Name', 'Last Name',
@@ -30,10 +29,12 @@ def test_json_headers_match_expected(web_table,expected_headers):
 @pytest.mark.parametrize(
     "department", ["Insurance", "Compliance", "Legal"])
 def test_departments(table_rows, department):
-    """Verify expected departments are available in the table."""
-    departments = {row["Department"].strip() for row in table_rows    }
-    assert department in departments, (f"Expected department '{department}' not found."
-        f"Available departments: {sorted(departments)}")
+    """Verify expected expected_departments are available in the table."""
+    print(table_rows)
+    assert table_rows, "Table contains no rows"
+    expected_departments = list({row["Department"] for row in table_rows})
+    assert department in expected_departments, (f"Expected department '{department}' not found."
+        f"Available expected_departments: {sorted(expected_departments)}")
 
 def test_names_fields_not_empty(table_rows):
     """Verify that all First and Last names are filled in."""

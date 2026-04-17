@@ -1,8 +1,8 @@
 from typing import List
+from selenium.common import StaleElementReferenceException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.remote.webelement import WebElement
-from selenium.webdriver.support import expected_conditions as EC
 from selenium_project.config import BASE_URL
 from selenium_project.pages.base_page import BasePage
 from selenium_project.locators.locators import Locator
@@ -33,7 +33,7 @@ class DatePicker(BasePage):
 
     def tap_date_field(self) -> None:
         """Tap Date input field."""
-        self.wait.until(EC.element_to_be_clickable(Locator.date_input)).click()
+        self.wait_clickable(Locator.date_input).click()
 
     def is_calendar_displayed(self) -> bool:
         """Return True if Calendar is displayed, else False."""
@@ -41,16 +41,16 @@ class DatePicker(BasePage):
 
     def tap_month_switch(self)-> None:
         """Tap on Month switch menu"""
-        self.wait.until(EC.visibility_of_element_located(Locator.month_switch)).click()
+        self.wait_visible(Locator.month_switch).click()
 
     def select_month(self, month_name: str) -> None:
         """
         Clicks a visible element like <span class="month">May</span> that equals the given month_name.
         """
         self.tap_month_switch()
-        month_el = self.wait.until(EC.element_to_be_clickable(
-            (By.XPATH, f"//span[contains(@class,'month') and normalize-space(text())='{month_name}']")))
-        month_el.click()
+        self.wait_clickable(
+            (By.XPATH, f"//span[contains(@class,'month') and normalize-space(text())='{month_name}']")
+        ).click()
 
     def get_all_months(self)-> list[WebElement]:
         """Return a list of all months in Calendar."""
@@ -63,9 +63,15 @@ class DatePicker(BasePage):
         return self.driver.find_elements(*Locator.all_dates)
 
     def select_date(self, date_val: int) -> None:
-        """Select a given calendar date."""
-        self.wait.until(EC.element_to_be_clickable(
-            (By.XPATH, f"//td[contains(@class,'day') and text()='{date_val}']"))).click()
+        """Select a given calendar date. Hanles stale elements in case of refresh."""
+        xpath = f"//td[contains(@class,'day') and normalize-space()='{date_val}']"
+        for _ in range(3):
+            try:
+                self.wait_clickable((By.XPATH, xpath)).click()
+                return
+            except StaleElementReferenceException:
+                continue
+        raise AssertionError(f"Date {date_val} could not be selected")
 
     def verify_date_set(self, date_set: int) -> bool:
         """Verify thet the selected date is set."""

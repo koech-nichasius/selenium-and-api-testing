@@ -1,6 +1,5 @@
 from pathlib import Path
 from selenium.webdriver.remote.webelement import WebElement
-from selenium.webdriver.support import expected_conditions as EC
 from selenium_project.config import BASE_URL
 from selenium_project.pages.base_page import BasePage
 from selenium_project.locators.locators import Locator
@@ -34,6 +33,5 @@ class FileUpload(BasePage):
 
     def is_file_submitted(self) -> bool:
         """Verify submission successful window opened."""
-        message = self.wait.until(
-            EC.visibility_of_element_located(Locator.submission_success))
+        message = self.wait_visible(Locator.submission_success)
         return message.is_displayed()
