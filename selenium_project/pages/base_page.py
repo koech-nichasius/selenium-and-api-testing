@@ -49,7 +49,7 @@ class BasePage:
         return message.is_displayed()
 
     def click_element(self, locator: Tuple[str, str]) -> None:
-        """Click element and retry once if it becomes stale."""
+        """Click element and retry if it becomes stale."""
         def _click(driver):
             try:
                 element = driver.find_element(*locator)
