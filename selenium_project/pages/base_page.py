@@ -52,11 +52,11 @@ class BasePage:
         """Tap backspace."""
         element.send_keys(Keys.BACKSPACE)
 
-    def wait_visible(self, locator):
+    def wait_visible(self, locator: ElementLocator) -> WebElement:
         """Wait until element is visible."""
         return self.wait.until(EC.visibility_of_element_located(locator))
 
-    def wait_clickable(self, locator):
+    def wait_clickable(self, locator: ElementLocator) -> WebElement:
         """Wait until element is clickable."""
         return self.wait.until(EC.element_to_be_clickable(locator))
 
@@ -68,7 +68,7 @@ class BasePage:
         """Wait until element is invisible."""
         return self.wait.until(EC.invisibility_of_element(locator))
 
-    def is_element_visible(self, element:WebElement) -> bool:
+    def is_element_visible(self, element:ElementLocator) -> bool:
         """Return True if element is displayed, else False."""
         return self.wait_visible(element).is_displayed()
 
