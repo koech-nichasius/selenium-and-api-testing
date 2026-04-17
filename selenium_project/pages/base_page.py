@@ -10,9 +10,9 @@ from selenium_project.locators.locators import Locator
 
 class BasePage:
     """This class contains common functions."""
-    def __init__(self,driver):
+    def __init__(self,driver, timeout=10):
         self.driver = driver
-        self.wait = WebDriverWait(driver, 20)
+        self.wait = WebDriverWait(self.driver, timeout=timeout)
 
     def launch_web_driver(self, target_url: str) -> None:
         """Navigate to the target URL and wait until DOM is available."""
@@ -39,23 +39,25 @@ class BasePage:
         """Wait until element is invisible."""
         return self.wait.until(EC.invisibility_of_element(locator))
 
-    def is_element_visible(self, element:Tuple[str, str]) -> bool:
+    def is_element_visible(self, locator:Tuple[str, str]) -> bool:
         """Return True if element is displayed, else False."""
-        return self.wait_visible(element).is_displayed()
+        return self.wait_visible(locator).is_displayed()
 
     def submission_success(self)-> bool:
         """Verify submission success."""
         message = self.wait_visible(Locator.submission_success)
         return message.is_displayed()
 
-    def click_element(self,element) -> None:
-        """Function handles stale elements. Fresh element
-        look-upo is initiated incase it is stale."""
-        try:
-            element.click()
-        except StaleElementReferenceException:
-            element = self.driver.find_element(element)
-            element.click()
+    def click_element(self, locator: Tuple[str, str]) -> None:
+        """Click element and retry once if it becomes stale."""
+        def _click(driver):
+            try:
+                element = driver.find_element(*locator)
+                element.click()
+                return True
+            except StaleElementReferenceException:
+                return False
+        self.wait.until(_click)
 
     @staticmethod
     def send_control_keys(element: WebElement, value:str) -> None:
