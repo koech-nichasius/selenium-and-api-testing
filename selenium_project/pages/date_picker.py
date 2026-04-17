@@ -1,7 +1,6 @@
 from typing import List
 from selenium.common import StaleElementReferenceException
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.remote.webelement import WebElement
 from selenium_project.config import BASE_URL
 from selenium_project.pages.base_page import BasePage
@@ -22,14 +21,8 @@ class DatePicker(BasePage):
 
     def clear_existing_date(self) -> None:
         """"Clear date field."""
-        date_input:WebElement =self.driver.find_element(self.date_input)
-        date_input.click()
-        self.send_control_keys(self.driver.find_element(date_input), "a")
-        self.tap_backspace(date_input)
-
-    def clear_entire_text(self) -> None:
-        date_input=self.driver.find_element(self.date_input)
-        date_input.date_input.send_keys(Keys.CONTROL + 'a', Keys.BACKSPACE)
+        date_input:WebElement = self.driver.find_element(self.date_input)
+        date_input.clear()
 
     def tap_date_field(self) -> None:
         """Tap Date input field."""
@@ -55,7 +48,7 @@ class DatePicker(BasePage):
     def get_all_months(self)-> list[WebElement]:
         """Return a list of all months in Calendar."""
         self.tap_month_switch()
-        all_months: List[WebElement] =self.driver.find_elements(*Locator.all_months)
+        all_months: List[WebElement] = self.driver.find_elements(*Locator.all_months)
         return all_months
 
     def get_dates(self) -> List[WebElement] :
