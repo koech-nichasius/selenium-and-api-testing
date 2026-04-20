@@ -8,7 +8,7 @@ class LoginPage(BasePage):
     """Page Object for Login functionality."""
     def __init__(self, driver):
         super().__init__(driver)
-        self.launch_web_driver(BASE_URL)
+        self.load_page(BASE_URL)
 
     @property
     def user_name_field(self) -> WebElement:

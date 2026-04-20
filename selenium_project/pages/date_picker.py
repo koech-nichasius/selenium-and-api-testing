@@ -12,7 +12,7 @@ class DatePicker(BasePage):
 
     def __init__(self, driver):
         super().__init__(driver)
-        self.launch_web_driver(BASE_URL)
+        self.load_page(BASE_URL)
 
     @property
     def month_switch(self):

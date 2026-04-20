@@ -10,7 +10,7 @@ class WebTable(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
         self.driver = driver
-        self.launch_web_driver(WEB_TABLE_URL)
+        self.load_page(WEB_TABLE_URL)
 
     @property
     def table(self) -> WebElement:
