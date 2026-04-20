@@ -12,7 +12,7 @@ LocatorType = Tuple[str, str]
 class Common:
     """Common class for all Page Objects."""
 
-    def __init__(self, driver: WebDriver, timeout):
+    def __init__(self, driver: WebDriver, timeout=10):
         self.driver = driver
         self.wait = WebDriverWait(self.driver, timeout)
 
