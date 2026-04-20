@@ -5,7 +5,7 @@ from selenium_project.locators.locators import Locator
 from selenium_project.pages.base_page import BasePage
 
 class WebTable(BasePage):
-    """"This class contains functions for the Web Table Page"""
+    """Page Object for WebTable functionality."""
 
     def __init__(self, driver):
         super().__init__(driver)

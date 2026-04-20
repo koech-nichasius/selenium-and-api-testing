@@ -8,25 +8,29 @@ from selenium_project.locators.locators import Locator
 
 
 class DatePicker(BasePage):
-    """"This class contains functions for the Date Picker Functionality."""
+    """Page Object for DatePicker functionality."""
 
     def __init__(self, driver):
         super().__init__(driver)
         self.launch_web_driver(BASE_URL)
 
     @property
+    def month_switch(self):
+        """Returns the month switch element"""
+        return self.wait_visible(Locator.month_switch)
+
+    @property
     def date_input(self) -> WebElement:
-        """Click on the Date Field"""
-        return self.driver.find_element(*Locator.date_input)
+        """Returns the Date Field element."""
+        return self.wait_clickable(Locator.date_input)
 
     def clear_existing_date(self) -> None:
         """"Clear date field."""
-        date_input:WebElement = self.driver.find_element(self.date_input)
-        date_input.clear()
+        self.date_input.clear()
 
     def tap_date_field(self) -> None:
         """Tap Date input field."""
-        self.wait_clickable(Locator.date_input).click()
+        self.date_input.click()
 
     def is_calendar_displayed(self) -> bool:
         """Return True if Calendar is displayed, else False."""
@@ -34,7 +38,7 @@ class DatePicker(BasePage):
 
     def tap_month_switch(self)-> None:
         """Tap on Month switch menu"""
-        self.wait_visible(Locator.month_switch).click()
+        self.month_switch.click()
 
     def select_month(self, month_name: str) -> None:
         """
@@ -48,8 +52,7 @@ class DatePicker(BasePage):
     def get_all_months(self)-> list[WebElement]:
         """Return a list of all months in Calendar."""
         self.tap_month_switch()
-        all_months: List[WebElement] = self.driver.find_elements(*Locator.all_months)
-        return all_months
+        return self.driver.find_elements(*Locator.all_months)
 
     def get_dates(self) -> List[WebElement] :
         """Get available dates for a selected month."""

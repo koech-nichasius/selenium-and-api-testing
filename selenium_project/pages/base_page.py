@@ -9,7 +9,7 @@ from selenium_project.locators.locators import Locator
 
 
 class BasePage:
-    """This class contains common functions."""
+    """Page Object for BasePage functionality."""
     def __init__(self,driver, timeout=10):
         self.driver = driver
         self.wait = WebDriverWait(self.driver, timeout=timeout)
