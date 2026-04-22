@@ -34,6 +34,7 @@ def api_client(config, reqres_headers):
 
 @pytest.fixture
 def users_api(api_client):
+    """Client here is a BaseClient object."""
     return UsersAPI(api_client)
 
 

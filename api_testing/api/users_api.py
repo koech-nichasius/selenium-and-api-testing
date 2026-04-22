@@ -6,7 +6,6 @@ class UsersAPI:
     All operations related to users are encapsulated and HTTP communication delegated
     to the provided API client.
     """
-
     def __init__(self, client):
         """Initialize the UsersAPI."""
         self.client = client

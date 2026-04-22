@@ -9,26 +9,13 @@ class StatusCodes:
     Created: int = 201
     Accepted: int = 202
     Deleted: int = 204
-
+    Bad_Request: int = 400
 
 
 @dataclass(frozen=True)
-class ApiTestData:
+class TestUser:
     """This class defines API Test data."""
-    id: int
-    email: str
-    first_name: str
-    last_name: str
-    avatar: None | str | dict[str, Any]
-
-payload = {
-  "name": "Nichasius",
-  "job": "QA Engineer"}
-
-valid_api_test_data = [
-    ApiTestData(
-        id=1,
-        email="george.bluth@dotesthere.com",
-        first_name="George",
-        last_name="Bluth",
-        avatar="https://dotesthere.com/img/faces/1-image.jpg")]
+    valid_payload = {
+         "name": "Nichasius",
+        "job": "QA Engineer"}
+    invalid_payload = ""
