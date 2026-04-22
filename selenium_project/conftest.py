@@ -1,3 +1,4 @@
+import random
 from typing import Generator
 from pytest import fixture
 from selenium import webdriver
@@ -5,6 +6,7 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.firefox.service import Service as FirefoxService
 from selenium.webdriver.firefox.webdriver import WebDriver
 
+from selenium_project.config import CALENDAR_MONTHS
 from selenium_project.pages.login import LoginPage
 from selenium_project.pages.dropdown import DropDownPage
 from selenium_project.pages.date_picker import DatePicker
@@ -72,8 +74,14 @@ def login(driver) -> LoginPage:
     """Instantiate LoginPage class."""
     return LoginPage(driver)
 
-@fixture(params=['Jan', 'Feb', 'Mar','Apr', 'May', 'Jun',
-                 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], ids=lambda c: c)
-def month(request) -> str:
+@fixture(params=CALENDAR_MONTHS, ids=lambda c: c)
+def months(request) -> str:
     """Fixture returns Calendar months one at a time.'"""
     return request.param
+
+@fixture
+def random_months(request):
+    """Fixture returns 5 Calendar months one at a time.'"""
+    return random.sample(request.param, 5)
+
+

@@ -17,7 +17,17 @@ class DatePicker(Common):
     @property
     def month_switch(self):
         """Returns the month switch element"""
-        return self.wait_visible(Locator.month_switch)
+        return self.driver.find_element(*Locator.month_switch)
+
+    @property
+    def next_month(self):
+        """Returns the next element"""
+        return self.driver.find_element(*Locator.next_month)
+
+    @property
+    def prev_month(self):
+        """Returns the prev element"""
+        return self.driver.find_element(*Locator.prev_month)
 
     @property
     def date_input(self) -> WebElement:
@@ -40,6 +50,22 @@ class DatePicker(Common):
         """Tap on Month switch menu"""
         self.month_switch.click()
 
+    def tap_next_icon(self)-> None:
+        """Tap on Next icon."""
+        self.next_month.click()
+
+    def tap_prev_icon(self)-> None:
+        """Tap on Prev icon."""
+        self.prev_month.click()
+
+    def navigate_to_next_month(self,target_month)-> None:
+        """Navigate to specified month via date picker switch."""
+        while True:
+            header = self.driver.find_element(*Locator.month_switch).text
+            if header.startswith(target_month):
+                break
+            self.tap_next_icon()
+
     def select_month(self, month_name: str) -> None:
         """
         Clicks a visible element like <span class="month">May</span> that equals the given month_name.
@@ -48,6 +74,7 @@ class DatePicker(Common):
         self.wait_clickable(
             (By.XPATH, f"//span[contains(@class,'month') and normalize-space(text())='{month_name}']")
         ).click()
+
 
     def get_all_months(self)-> list[WebElement]:
         """Return a list of all months in Calendar."""
@@ -73,3 +100,6 @@ class DatePicker(Common):
         """Verify thet the selected date is set."""
         return int(self.date_input.get_attribute("value").split("/")[1]) == date_set
 
+    def verify_month_selected(self, month: str) -> bool:
+        """Verify thet the selected month is set."""
+        return month in self.month_switch.text

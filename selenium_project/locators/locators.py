@@ -35,9 +35,10 @@ class Locator:
         "and not(contains(@class,'new'))]"
     )
     date_input = (By.NAME, "my-date")
-    all_months = (By.XPATH, "//span[contains(concat(' ', normalize-space(@class), ' '), ' month ')]")
+    next_month = (By.XPATH, "//th[@class='next']")
+    prev_month = (By.XPATH, "//th[@class='prev']")
     month_switch = (By.CSS_SELECTOR, "th[class='datepicker-switch']")
-
+    all_months = (By.XPATH, "//span[contains(concat(' ', normalize-space(@class), ' '), ' month ')]")
 
     # Web Table elements
     table = (By.XPATH,"//form//table")
