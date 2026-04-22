@@ -45,7 +45,7 @@ class TestDatePicker:
         assert date_picker.verify_month_selected('Jan'), f"Selected month not set."
 
     def test_prev_boundary_month(self, date_picker):
-        """This test verifies navigation to next boundary month."""
+        """This test verifies navigation to previous boundary month."""
         date_picker.tap_date_field()
         date_picker.navigate_to_next_month('Jan')
         date_picker.tap_prev_icon()
