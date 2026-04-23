@@ -22,7 +22,7 @@ class TestDatePicker:
         """This test navigates to random calendar months."""
         date_picker.tap_date_field()
         for month in random_months:
-            date_picker.navigate_to_next_month(month)
+            date_picker.navigate_to_month(month)
             assert date_picker.verify_month_selected(month), f"Selected month not set: {month}."
 
     @pytest.mark.parametrize(
@@ -31,7 +31,7 @@ class TestDatePicker:
         """This test sets a random date for each calendar month."""
         date_picker.tap_date_field()
         for month in months:
-            date_picker.navigate_to_next_month(month)
+            date_picker.navigate_to_month(month)
             date = random.randint(1, len(date_picker.get_dates()))
             date_picker.select_date(date)
             assert date_picker.verify_date_set(date), f"Selected date not set: {date},{months}."
@@ -39,13 +39,13 @@ class TestDatePicker:
     def test_next_boundary_month(self, date_picker):
         """This test verifies navigation to next boundary month."""
         date_picker.tap_date_field()
-        date_picker.navigate_to_next_month('Dec')
+        date_picker.navigate_to_month('Dec')
         date_picker.tap_next_icon()
         assert date_picker.verify_month_selected('Jan'), f"Selected month not set."
 
     def test_prev_boundary_month(self, date_picker):
         """This test verifies navigation to previous boundary month."""
         date_picker.tap_date_field()
-        date_picker.navigate_to_next_month('Jan')
+        date_picker.navigate_to_month('Jan')
         date_picker.tap_prev_icon()
         assert date_picker.verify_month_selected('Dec'), f"Selected month not set."

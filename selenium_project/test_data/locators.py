@@ -40,6 +40,16 @@ class Locator:
     month_switch = (By.CSS_SELECTOR, "th[class='datepicker-switch']")
     all_months = (By.XPATH, "//span[contains(concat(' ', normalize-space(@class), ' '), ' month ')]")
 
+    @staticmethod
+    def month_by_name(month_name: str):
+        return (By.XPATH,
+            f"//span[contains(@class,'month') and normalize-space(text())='{month_name}']")
+
+    @staticmethod
+    def date_by_value(date_val: int):
+        return (By.XPATH,
+            f"//td[contains(@class,'day') and normalize-space()='{date_val}']")
+
     # Web Table elements
     table = (By.XPATH,"//form//table")
     table_headers = (By.XPATH, ".//tr/th")
