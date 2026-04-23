@@ -5,8 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.firefox.service import Service as FirefoxService
 from selenium.webdriver.firefox.webdriver import WebDriver
-
-from selenium_project.config import CALENDAR_MONTHS
+from selenium_project.test_data.test_data import TestData
 from selenium_project.pages.login import LoginPage
 from selenium_project.pages.dropdown import DropDownPage
 from selenium_project.pages.date_picker import DatePicker
@@ -74,7 +73,7 @@ def login(driver) -> LoginPage:
     """Instantiate LoginPage class."""
     return LoginPage(driver)
 
-@fixture(params=CALENDAR_MONTHS, ids=lambda c: c)
+@fixture(params=TestData.calendar_months, ids=lambda c: c)
 def months(request) -> str:
     """Fixture returns Calendar months one at a time.'"""
     return request.param

@@ -1,29 +1,17 @@
 from selenium.webdriver.remote.webelement import WebElement
-from selenium_project.config import BASE_URL
-from selenium_project.helper_functions.common_functions import Common
-from selenium_project.locators.locators import Locator
+from selenium_project.common_functions.common_functions import Common
+from selenium_project.test_data.locators import Locator
+from selenium_project.test_data.test_data import TestData
 
 
 class LoginPage(Common):
     """Page Object for Login functionality."""
     def __init__(self, driver):
         super().__init__(driver)
-        self.load_page(BASE_URL)
-
-    @property
-    def user_name_field(self) -> WebElement:
-        """Function returns the username field element."""
-        return self.driver.find_element(*Locator.user_name_input)
-
-    @property
-    def password_field(self) -> WebElement:
-        """Function returns the password field element."""
-        return self.driver.find_element(*Locator.password_input)
-
-    @property
-    def submit_button(self) -> WebElement:
-        """Function returns the submit button element."""
-        return self.wait_clickable(Locator.submit_button)
+        self.load_page(TestData.base_url)
+        self.submit_button: WebElement=self.wait_clickable(Locator.submit_button)
+        self.user_name_field:WebElement = self.driver.find_element(*Locator.user_name_input)
+        self.password_field: WebElement = self.driver.find_element(*Locator.password_input)
 
     def enter_user_name(self, user_name:str) -> None:
         """Enter the User Login  Name."""

@@ -1,8 +1,9 @@
 from typing import List
 from selenium.webdriver.remote.webelement import WebElement
-from selenium_project.config import WEB_TABLE_URL
-from selenium_project.helper_functions.common_functions import Common
-from selenium_project.locators.locators import Locator
+from selenium_project.common_functions.common_functions import Common
+from selenium_project.test_data.locators import Locator
+from selenium_project.test_data.test_data import TestData
+
 
 class WebTable(Common):
     """Page Object for WebTable functionality."""
@@ -10,7 +11,7 @@ class WebTable(Common):
     def __init__(self, driver):
         super().__init__(driver)
         self.driver = driver
-        self.load_page(WEB_TABLE_URL)
+        self.load_page(TestData.web_table_url)
 
     @property
     def table(self) -> WebElement:

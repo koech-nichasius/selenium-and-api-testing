@@ -1,20 +1,23 @@
-from selenium.webdriver.common.by import By
-from selenium.webdriver.remote.webelement import WebElement
-from selenium_project.common_functions.common_functions import Common
-from selenium_project.test_data.locators import Locator
-from selenium_project.test_data.test_data import TestData
-
-
 class Slider(Common):
     """Page Object for Slider functionality."""
 
     def __init__(self, driver):
         super().__init__(driver)
+
+    def open(self) -> None:
         self.load_page(TestData.base_url)
-        self.slider: WebElement =self.driver.find_element(By.NAME, Locator.slider)
+
+    @property
+    def slider(self) -> WebElement:
+        return self.driver.find_element(By.NAME, Locator.slider)
 
     def set_slider_value(self, value: int) -> None:
-        """Set actual slider value. Move the slider {offset} pixels to the right"""
+        min_val = self.get_slider_min_value()
+        max_val = self.get_slider_max_value()
+
+        if not min_val <= value <= max_val:
+            raise ValueError(f"Value {value} out of range ({min_val}-{max_val})")
+
         self.driver.execute_script(
             """
             arguments[0].value = arguments[1];
@@ -22,16 +25,14 @@ class Slider(Common):
             arguments[0].dispatchEvent(new Event('change', { bubbles: true }));
             """,
             self.slider,
-            value)
+            value
+        )
 
-    def get_slider_min_value(self)-> int:
-        """Get slider min value."""
+    def get_slider_min_value(self) -> int:
         return int(self.slider.get_attribute("min"))
 
-    def get_slider_max_value(self)-> int:
-        """Get slider max value."""
+    def get_slider_max_value(self) -> int:
         return int(self.slider.get_attribute("max"))
 
     def get_slider_value(self) -> int:
-        """Get current slider value."""
         return int(self.slider.get_attribute("value"))

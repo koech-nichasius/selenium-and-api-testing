@@ -1,7 +1,6 @@
 import random
 import pytest
-from selenium_project.config import CALENDAR_MONTHS
-
+from selenium_project.test_data.test_data import TestData
 
 class TestDatePicker:
     """Test suite for validating Date picker behavior."""
@@ -15,10 +14,10 @@ class TestDatePicker:
         """This test verifies that all calendar months are available and no duplicated months."""
         date_picker.tap_date_field()
         month_list=[month.text for month in date_picker.get_all_months()]
-        assert month_list == CALENDAR_MONTHS,"Missing month in calendar"
+        assert month_list == TestData.calendar_months,"Missing month in calendar"
 
     @pytest.mark.parametrize(
-        "random_months",[CALENDAR_MONTHS], indirect=True)
+        "random_months",[TestData.calendar_months], indirect=True)
     def test_navigate_to_random_month(self,date_picker,random_months):
         """This test navigates to random calendar months."""
         date_picker.tap_date_field()
@@ -27,7 +26,7 @@ class TestDatePicker:
             assert date_picker.verify_month_selected(month), f"Selected month not set: {month}."
 
     @pytest.mark.parametrize(
-        "months",[CALENDAR_MONTHS], indirect=True)
+        "months",[TestData.calendar_months], indirect=True)
     def test_set_random_date(self,date_picker,months):
         """This test sets a random date for each calendar month."""
         date_picker.tap_date_field()

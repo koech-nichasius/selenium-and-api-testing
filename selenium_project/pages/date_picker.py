@@ -2,9 +2,9 @@ from typing import List
 from selenium.common import StaleElementReferenceException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
-from selenium_project.config import BASE_URL
-from selenium_project.helper_functions.common_functions import Common
-from selenium_project.locators.locators import Locator
+from selenium_project.common_functions.common_functions import Common
+from selenium_project.test_data.locators import Locator
+from selenium_project.test_data.test_data import TestData
 
 
 class DatePicker(Common):
@@ -12,7 +12,7 @@ class DatePicker(Common):
 
     def __init__(self, driver):
         super().__init__(driver)
-        self.load_page(BASE_URL)
+        self.load_page(TestData.base_url)
 
     @property
     def month_switch(self):

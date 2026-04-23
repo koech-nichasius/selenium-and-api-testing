@@ -41,7 +41,7 @@ class Common:
         """Wait for element to be clickable."""
         return self.wait.until(EC.element_to_be_clickable(locator))
 
-    def wait_for_dynamic_element_clickable(self, locator):
+    def wait_for_dynamic_element_clickable(self, locator: LocatorType):
         """Wait for dynamic element to be clickable."""
         self.wait.until(self.element_clickable_with_retry(locator))
 
