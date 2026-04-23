@@ -3,8 +3,8 @@ from typing import List
 from selenium.common import StaleElementReferenceException, TimeoutException
 from selenium.webdriver.remote.webelement import WebElement
 from selenium_project.common_functions.common_functions import Common
-from selenium_project.test_data.locators import Locator
-from selenium_project.test_data.test_data import TestData
+from selenium_project.resources.locators import Locator
+from selenium_project.resources.selenium_data import SeleniumData
 
 
 class DatePicker(Common):
@@ -12,7 +12,7 @@ class DatePicker(Common):
 
     def __init__(self, driver):
         super().__init__(driver)
-        self.load_page(TestData.base_url)
+        self.load_page(SeleniumData.base_url)
 
     @property
     def month_switch(self) -> WebElement:
@@ -61,7 +61,7 @@ class DatePicker(Common):
 
     def navigate_to_month(self, target_month: str) -> None:
         """Navigate to specified month via date picker switch."""
-        for _ in range(len(TestData.calendar_months)):
+        for _ in range(len(SeleniumData.calendar_months)):
             if self.month_switch.text.startswith(target_month):
                 return
             self.tap_next_icon()

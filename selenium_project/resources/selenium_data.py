@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 
 @dataclass
-class TestData:
+class SeleniumData:
     """This dataclass contains Test data."""
     base_url = "https://www.selenium.dev/selenium/web/web-form.html"
     web_table_url = "https://www.tutorialspoint.com/selenium/practice/webtables.php"

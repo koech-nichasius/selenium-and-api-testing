@@ -2,7 +2,7 @@ import re
 import pytest
 from pathlib import Path
 
-file_path = Path(__file__).parent.parent / "test_data/upload_file.txt"
+file_path = Path(__file__).parent.parent / "resources/upload_file.txt"
 
 
 @pytest.fixture
