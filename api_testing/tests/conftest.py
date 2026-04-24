@@ -1,14 +1,12 @@
 import os
+from pathlib import Path
+
 import yaml
 import pytest
 
 from api_testing.api.base_client import BaseClient
 from api_testing.api.products_api import ProductsAPI
 from api_testing.api.users_api import UsersAPI
-
-@pytest.fixture(scope="session")
-def base_url():
-    return "https://reqres.in"
 
 @pytest.fixture(scope="session")
 def reqres_headers():
@@ -23,7 +21,8 @@ def reqres_headers():
 
 @pytest.fixture(scope="session")
 def config():
-    with open("api_testing/config/config.yaml") as f:
+    config_path = Path(__file__).parent.parent / "config/config.yaml"
+    with config_path.open(encoding="utf-8") as f:
         return yaml.safe_load(f)
 
 @pytest.fixture(scope="session")

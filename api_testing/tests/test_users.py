@@ -34,6 +34,6 @@ class TestUsers:
     def test_create_invalid_user(self, users_api):
         """Test Invalid request to create user."""
         response = users_api.create_user(payload=UserTestData.invalid_user_payload)
-        assert_status_code(response=response,expected=StatusCodes.Bad_Request)
+        assert_status_code(response=response, expected=StatusCodes.BadRequest)
         body = response.json()
         assert "error" in body

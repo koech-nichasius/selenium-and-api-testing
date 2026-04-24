@@ -78,9 +78,13 @@ def months(request) -> str:
     """Fixture returns Calendar months one at a time.'"""
     return request.param
 
+@fixture()
+def calendar_months() -> str:
+    """Fixture returns Calendar months.'"""
+    return SeleniumData.calendar_months
+
 @fixture
-def random_months(request):
+def random_months(calendar_months) -> list[str]:
     """Fixture returns 5 Calendar months one at a time.'"""
-    return random.sample(request.param, 5)
-
-
+    random_months = 5
+    return random.sample(calendar_months, random_months)

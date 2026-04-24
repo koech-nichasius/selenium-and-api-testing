@@ -1,5 +1,4 @@
 """This module contains data definitions for testing API."""
-from typing import Any
 from dataclasses import dataclass
 
 @dataclass(frozen=True)
@@ -9,8 +8,13 @@ class StatusCodes:
     Created: int = 201
     Accepted: int = 202
     Deleted: int = 204
-    Bad_Request: int = 400
-
+    BadRequest: int = 400
+    Unauthorized: int = 401
+    Forbidden: int = 403
+    NotFound: int = 404
+    InternalServerError: int = 500
+    NotImplemented: int = 501
+    BadGateway: int = 502
 
 @dataclass(frozen=True)
 class UserTestData:

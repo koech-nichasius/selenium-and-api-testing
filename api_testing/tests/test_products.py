@@ -34,6 +34,6 @@ class TestProduct:
     def test_create_invalid_product(self, products_api):
         """Test Invalid request to create product."""
         response = products_api.create_product(payload=ProductTestData.invalid_product_payload)
-        assert_status_code(response=response,expected=StatusCodes.Bad_Request)
+        assert_status_code(response=response, expected=StatusCodes.BadRequest)
         body = response.json()
         assert "error" in body
