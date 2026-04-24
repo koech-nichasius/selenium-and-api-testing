@@ -1,1 +1,57 @@
-https://docs.python.org/3.15/whatsnew/3.15.html
+# Selenium Further Learning Project (Python)
+
+This project is a **personal Selenium WebDriver playground** built in Python to practice and understand **advanced Selenium concepts** through small, focused test cases.  
+Each test is intentionally minimal and isolated, allowing experimentation with specific Selenium features and patterns without framework overhead.
+
+The goal is **learning by implementation**, not production-ready automation.
+
+---
+
+## 🎯 Objectives
+
+- Deepen understanding of **Selenium WebDriver internals**
+- Practice **advanced browser automation techniques**
+- Experiment with **synchronization, waits, and browser behavior**
+
+---
+
+## 🧪 What’s Covered
+
+This project includes small tests that demonstrate:
+
+- Explicit & implicit waits
+- Advanced element interactions
+- Handling dynamic content
+- JavaScript execution via WebDriver
+- Browser window & tab management
+- File upload / download handling
+- Common synchronization pitfalls and solutions
+
+
+---
+
+## 🛠 Tech Stack
+
+- **Python 3**
+- **Selenium WebDriver**
+- **pytest**
+- **Chrome / Firefox**
+- WebDriver Manager
+
+---
+
+## 📂 Project Structure
+
+```text
+selenium_project/
+├── common_functions/
+├── pages/
+├── resources/
+├── tests/
+│   ├── conftest.py
+│   ├── test_login.py
+│   ├── test_drop_down.py
+│   ├── test_web_table.py
+│   └── ...
+├── README.md
+└── requirements.txt
