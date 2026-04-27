@@ -4,6 +4,9 @@ from selenium.webdriver.common.by import By
 def by_xpath(item: str):
     return By.XPATH, f"{item}"
 
+def by_id(item: str):
+    return By.ID, f"{item}"
+
 def by_name(item: str):
     return By.NAME, f"{item}"
 
@@ -27,7 +30,7 @@ class CommonLocator:
     dropdown_select = by_name("my-select")
 
     # Submission page
-    submission_success = (By.ID, "message")
+    submission_success = by_id("message")
     submission_form = "submitted-form.html"
 
     # File Upload elements
