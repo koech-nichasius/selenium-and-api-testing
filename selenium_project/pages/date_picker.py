@@ -2,12 +2,12 @@ from datetime import datetime
 from typing import List
 from selenium.common import StaleElementReferenceException, TimeoutException
 from selenium.webdriver.remote.webelement import WebElement
-from selenium_project.common_functions.common_functions import Common
-from selenium_project.resources.locators import Locator
+from selenium_project.common_functions.common_functions import CommonFunctions
+from selenium_project.resources.locators import CommonLocator
 from selenium_project.resources.selenium_data import SeleniumData
 
 
-class DatePicker(Common):
+class DatePicker(CommonFunctions):
     """Page Object for DatePicker functionality."""
 
     def __init__(self, driver):
@@ -17,22 +17,22 @@ class DatePicker(Common):
     @property
     def month_switch(self) -> WebElement:
         """Returns the month switch element"""
-        return self.driver.find_element(*Locator.month_switch)
+        return self.driver.find_element(*CommonLocator.month_switch)
 
     @property
     def next_month(self) -> WebElement:
         """Returns the next element"""
-        return self.driver.find_element(*Locator.next_month)
+        return self.driver.find_element(*CommonLocator.next_month)
 
     @property
     def prev_month(self):
         """Returns the prev element"""
-        return self.driver.find_element(*Locator.prev_month)
+        return self.driver.find_element(*CommonLocator.prev_month)
 
     @property
     def date_input(self) -> WebElement:
         """Returns the Date Field element."""
-        return self.wait_clickable(Locator.date_input)
+        return self.wait_clickable(CommonLocator.date_input)
 
     def clear_existing_date(self) -> None:
         """"Clear date field."""
@@ -44,11 +44,11 @@ class DatePicker(Common):
 
     def is_calendar_displayed(self) -> bool:
         """Return True if Calendar is displayed, else False."""
-        return self.is_element_visible(Locator.month_switch)
+        return self.is_element_visible(CommonLocator.month_switch)
 
     def tap_month_switch(self)-> None:
         """Tap on Month switch menu"""
-        if not self.is_element_visible(Locator.all_months):
+        if not self.is_element_visible(CommonLocator.all_months):
             self.month_switch.click()
 
     def tap_next_icon(self)-> None:
@@ -69,7 +69,7 @@ class DatePicker(Common):
 
     def select_month(self, month_name: str) -> None:
         self.tap_month_switch()
-        month_locator = Locator.month_by_name(month_name)
+        month_locator = CommonLocator.month_by_name(month_name)
         try:
             self.wait_clickable(month_locator).click()
         except TimeoutException:
@@ -78,15 +78,15 @@ class DatePicker(Common):
     def get_all_months(self)-> list[WebElement]:
         """Return a list of all months in Calendar."""
         self.tap_month_switch()
-        return self.driver.find_elements(*Locator.all_months)
+        return self.driver.find_elements(*CommonLocator.all_months)
 
     def get_dates(self) -> List[WebElement] :
         """Get available dates for a selected month."""
-        return self.driver.find_elements(*Locator.all_dates)
+        return self.driver.find_elements(*CommonLocator.all_dates)
 
     def select_date(self, date_val: int) -> None:
         """Select a given calendar date. Hanles stale elements in case of refresh."""
-        date = Locator.date_by_value(date_val)
+        date = CommonLocator.date_by_value(date_val)
         for trial in range(3):
             try:
                 self.wait_clickable(date).click()

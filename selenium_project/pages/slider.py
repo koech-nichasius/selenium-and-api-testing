@@ -1,17 +1,17 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
-from selenium_project.common_functions.common_functions import Common
-from selenium_project.resources.locators import Locator
+from selenium_project.common_functions.common_functions import CommonFunctions
+from selenium_project.resources.locators import CommonLocator
 from selenium_project.resources.selenium_data import SeleniumData
 
 
-class Slider(Common):
+class Slider(CommonFunctions):
     """Page Object for Slider functionality."""
 
     def __init__(self, driver):
         super().__init__(driver)
         self.load_page(SeleniumData.base_url)
-        self.slider: WebElement =self.driver.find_element(By.NAME, Locator.slider)
+        self.slider: WebElement =self.driver.find_element(By.NAME, CommonLocator.slider)
 
     def set_slider_value(self, value: int) -> None:
         """Set actual slider value. Move the slider {offset} pixels to the right"""

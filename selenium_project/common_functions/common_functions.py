@@ -9,8 +9,8 @@ from selenium.common.exceptions import TimeoutException, StaleElementReferenceEx
 
 LocatorType = Tuple[str, str]
 
-class Common:
-    """Common class for all Page Objects."""
+class CommonFunctions:
+    """CommonFunctions class for all Page Objects."""
 
     def __init__(self, driver: WebDriver, timeout=10):
         self.driver = driver

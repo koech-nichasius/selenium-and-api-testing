@@ -1,17 +1,17 @@
 from selenium.webdriver.remote.webelement import WebElement
-from selenium_project.common_functions.common_functions import Common
-from selenium_project.resources.locators import Locator
+from selenium_project.common_functions.common_functions import CommonFunctions
+from selenium_project.resources.locators import CommonLocator
 from selenium_project.resources.selenium_data import SeleniumData
 
 
-class LoginPage(Common):
+class LoginPage(CommonFunctions):
     """Page Object for Login functionality."""
     def __init__(self, driver):
         super().__init__(driver)
         self.load_page(SeleniumData.base_url)
-        self.submit_button: WebElement=self.wait_clickable(Locator.submit_button)
-        self.user_name_field:WebElement = self.driver.find_element(*Locator.user_name_input)
-        self.password_field: WebElement = self.driver.find_element(*Locator.password_input)
+        self.submit_button: WebElement=self.wait_clickable(CommonLocator.submit_button)
+        self.user_name_field:WebElement = self.driver.find_element(*CommonLocator.user_name_input)
+        self.password_field: WebElement = self.driver.find_element(*CommonLocator.password_input)
 
     def enter_user_name(self, user_name:str) -> None:
         """Enter the User Login  Name."""
@@ -29,10 +29,10 @@ class LoginPage(Common):
 
     def is_logged_in(self)-> bool:
         """Verify Login successful window opened."""
-        self.wait.until(lambda d: Locator.submission_form in d.current_url)
-        return  Locator.submission_form in self.driver.current_url
+        self.wait.until(lambda d: CommonLocator.submission_form in d.current_url)
+        return  CommonLocator.submission_form in self.driver.current_url
 
     def submission_success(self)-> bool:
         """Verify submission success."""
-        message = self.wait_visible(Locator.submission_success)
+        message = self.wait_visible(CommonLocator.submission_success)
         return message.is_displayed()

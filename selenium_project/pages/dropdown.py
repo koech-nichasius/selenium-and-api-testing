@@ -2,12 +2,12 @@ import logging
 from typing import List
 from selenium.common import NoSuchElementException
 from selenium.webdriver.support.select import Select
-from selenium_project.common_functions.common_functions import Common
-from selenium_project.resources.locators import Locator
+from selenium_project.common_functions.common_functions import CommonFunctions
+from selenium_project.resources.locators import CommonLocator
 from selenium_project.resources.selenium_data import SeleniumData
 
 
-class DropDownPage(Common):
+class DropDownPage(CommonFunctions):
     """Page Object for DropDownPage functionality."""
     def __init__(self, driver):
         super().__init__(driver)
@@ -17,7 +17,7 @@ class DropDownPage(Common):
     def drop_down(self)-> Select:
         """Initialize dropdown element."""
         logging.info("Initialising Dropdown elements.")
-        return Select(self.driver.find_element(*Locator.dropdown_select))
+        return Select(self.driver.find_element(*CommonLocator.dropdown_select))
 
     def get_all_selected_options(self)-> List[str]:
         """Function returns a list of all selected dropdown options assuming

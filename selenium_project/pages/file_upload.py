@@ -1,11 +1,11 @@
 from pathlib import Path
 from selenium.webdriver.remote.webelement import WebElement
-from selenium_project.common_functions.common_functions import Common
-from selenium_project.resources.locators import Locator
+from selenium_project.common_functions.common_functions import CommonFunctions
+from selenium_project.resources.locators import CommonLocator
 from selenium_project.resources.selenium_data import SeleniumData
 
 
-class FileUpload(Common):
+class FileUpload(CommonFunctions):
     """Page Object for FileUpload functionality."""
     def __init__(self, driver):
         super().__init__(driver)
@@ -14,7 +14,7 @@ class FileUpload(Common):
     @property
     def upload_file_btn(self) -> WebElement:
         """Property returns Upload File button."""
-        return self.driver.find_element(*Locator.file_upload)
+        return self.driver.find_element(*CommonLocator.file_upload)
 
     def upload_file(self, file_path:str)-> None:
         """Upload file"""
@@ -29,9 +29,9 @@ class FileUpload(Common):
 
     def tap_submit_btn(self)-> None:
         """Press submit Button"""
-        self.driver.find_element(*Locator.submit_button).click()
+        self.driver.find_element(*CommonLocator.submit_button).click()
 
     def is_file_submitted(self) -> bool:
         """Verify submission successful window opened."""
-        message = self.wait_visible(Locator.submission_success)
+        message = self.wait_visible(CommonLocator.submission_success)
         return message.is_displayed()
